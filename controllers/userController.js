@@ -1,5 +1,11 @@
 const userModel = require("../models/userModel");
 
+//GET
+const getUser=async(req,res)=>{
+   const [user] = await userModel.getUser();
+   res.json(user);
+};
+
 // INSERT
 const createUser = async (req, res) => {
   try {
@@ -32,7 +38,9 @@ const updateUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ message: "User updated successfully" });
+    res.json({ message: "User updated successfully",
+               affectedRows :result.affectedRows
+     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -59,4 +67,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getUser,
 };

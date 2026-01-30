@@ -1,5 +1,12 @@
 const pool = require("../config/db");
 
+// GET user
+
+const getUser= async()=>{
+  const [row]=await pool.query("select * from users");
+  return row;
+}
+
 // INSERT user
 const createUser = async (name, email) => {
   const [result] = await pool.query(
@@ -31,4 +38,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getUser,
 };
